@@ -79,7 +79,7 @@ public class LoginPanel {
        return false;
     }
     
-    public static void createAccount(String login, String password) throws ArithmeticException {
+    public static void createAccount(String login, String password) {
        File f = new File(path);
        LoginPanel.login = login;
        LoginPanel.password = password;
