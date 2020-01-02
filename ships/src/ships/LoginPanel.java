@@ -21,7 +21,7 @@ public class LoginPanel {
     private static String login;
     private static String password;
     private static Writer output;
-    private static String path = "C:\\Users\\wojmo\\Documents\\NetBeansProjects\\ships\\users\\users.txt";
+    private static String path = "C:\\Users\\wojmo\\Documents\\NetBeansProjects\\ships\\ships\\ships\\users\\users.txt";
     private static File f = new File(path);
     private static LoginPanel instance;
 
