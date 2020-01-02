@@ -5,17 +5,21 @@
  */
 package ships;
 
+import java.util.Scanner;
+
 /**
  *
- * @author wojmo
+ * @author wojmo 
  */
 public class Ships {
 
+    private static Scanner sc = new Scanner(System.in);
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("TEST");
+        LoginPanel.getInstance();
+        LoginPanel.createAccount("testikowo", "haselko");
     }
     
 }
