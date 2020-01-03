@@ -16,31 +16,27 @@ import java.util.Scanner;
  *
  * @author wojmo
  */
-public class LoginPanel {
+public class UserData {
     private static Scanner sc;
+    private static Scanner in = new Scanner(System.in);
     private static String login;
     private static String password;
     private static Writer output;
     private static String path = "C:\\Users\\wojmo\\Documents\\NetBeansProjects\\ships\\ships\\ships\\users\\users.txt";
     private static File f = new File(path);
-    private static LoginPanel instance;
+    private static UserData instance;
 
 
-    private LoginPanel() {}
+    private UserData() {}
     
-    public static LoginPanel getInstance(){
+    public static UserData getInstance(){
         if(instance == null){
-            instance = new LoginPanel();
+            instance = new UserData();
         }
         return instance;
     }
     
-    public static void setLoginData(String _login, String _password){
-        login = _login;
-        password = _password;
-    }
-    
-    public static void openFile(){
+    private static void openFile(){
         try {
              sc =new Scanner (f);
           }
@@ -64,6 +60,13 @@ public class LoginPanel {
        return false;
     }
     
+    public static void displayDataPanel(){
+        System.out.print("Uzytkownik: ");
+        UserData.login = in.nextLine();
+        System.out.print("Hasło: ");
+        UserData.password = in.nextLine();
+    }
+    
     public static boolean checkUser(){
         openFile();
         String temp;
@@ -79,17 +82,15 @@ public class LoginPanel {
        return false;
     }
     
-    public static void createAccount(String login, String password) {
+    public static void createAccount() {
        File f = new File(path);
-       LoginPanel.login = login;
-       LoginPanel.password = password;
        if(checkUser()){
            System.out.println("Uzytkownik juz istnieje!");
            return;
        }
        try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(f, true));
-            bw.append(LoginPanel.login + " " + LoginPanel.password);
+            bw.append(UserData.login + " " + UserData.password);
             bw.newLine();
             bw.close();
         } catch (IOException e) {

@@ -17,9 +17,9 @@ public class Ships {
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String[] args) {
-        LoginPanel.getInstance();
-        LoginPanel.createAccount("testikowo", "haselko");
+        Menu.displayLoginRegisterChoose();
     }
     
 }
