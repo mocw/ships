@@ -37,7 +37,28 @@ public class Menu {
     }
     
     private static void displayMainMenu() {
-        System.out.println("Tutaj będzie główne menu!");
+        System.out.println("MENU GŁÓWNE");
+        System.out.println("1. Nowa gra");
+        System.out.println("2. Wróc do rozgrywki");
+        System.out.println("3. Obejrzyj poprzednie gry");
+        System.out.println("4. Profil użytkownika");
+        char ch = sc.next().charAt(0);
+        switch(ch){
+            case '1':
+                break;
+            case '2':
+                break;
+            case '3':
+                Menu.displayMainMenu();
+                break;
+            case '4':
+                UserData.displayProfile();
+                break;
+            default:
+                System.out.println("Nieprawidłowy wybór!");
+                Menu.displayMainMenu();
+                break;
+        }
     }
     
     private static void displayRegisterPanel() {
@@ -67,6 +88,7 @@ public class Menu {
         System.out.println("Witaj w grze statki. Wybierz co chcesz zrobić:");
         System.out.println("1 - ZALOGUJ SIE");
         System.out.println("2 - REJESTRACJA");
+        System.out.println("3 - ZAKOŃCZ");
         char wybor = sc.next().charAt(0);
         switch(wybor){
             case '1':
@@ -75,8 +97,12 @@ public class Menu {
             case '2':
                 displayRegisterPanel();                
                 break;
+             case '3':
+                              
+                break;
             default:
                 System.out.println("Nieprawidlowy wybor!");
+                Menu.displayLoginRegisterChoose();
                 break;
         }
     }

@@ -11,7 +11,7 @@ import java.util.Scanner;
  *
  * @author wojmo 
  */
-public class Ships {
+public class BatttleShips {
 
     private static Scanner sc = new Scanner(System.in);
     /**

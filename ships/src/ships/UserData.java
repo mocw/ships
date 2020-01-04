@@ -5,8 +5,11 @@
  */
 package ships;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -25,7 +28,6 @@ public class UserData {
     private static String path = "C:\\Users\\wojmo\\Documents\\NetBeansProjects\\ships\\ships\\ships\\users\\users.txt";
     private static File f = new File(path);
     private static UserData instance;
-
 
     private UserData() {}
     
@@ -97,4 +99,71 @@ public class UserData {
             System.out.println(e.getMessage());
         }
     }
+    
+    public static void displayProfile(){
+        System.out.println("Profil użytkownika " + UserData.login);
+        System.out.println("1. Zmień nick");
+        System.out.println("1. Zmień hasło");
+        char ch = in.next().charAt(0);
+        switch(ch){
+            case '1':
+                UserData.changeNick();
+                break;
+            case '2':
+                UserData.changePassword();
+                break;
+        }
+    }
+    
+    private static void changeNick() {
+        String nickname;
+        System.out.println("Podaj nowy nick:");
+        nickname = in.next();
+         openFile();             
+          try {
+        BufferedReader file = new BufferedReader(new FileReader(path));
+        StringBuffer inputBuffer = new StringBuffer();
+        String line;
+
+        while ((line = file.readLine()) != null) {
+            inputBuffer.append(line);
+            inputBuffer.append('\n');
+        }
+        file.close();
+        String inputStr = inputBuffer.toString();
+        inputStr = inputStr.replace(UserData.login, nickname);
+        FileOutputStream fileOut = new FileOutputStream(path);
+        fileOut.write(inputStr.getBytes());
+        fileOut.close();
+        }
+     catch (Exception e) {
+        System.out.println("Problem z odczytem pliku.");
+        }          
+    }
+    
+    private static void changePassword() {
+       String passwd;
+        System.out.println("Podaj nowe haslo:");
+        passwd = in.next();
+         openFile();             
+          try {
+        BufferedReader file = new BufferedReader(new FileReader(path));
+        StringBuffer inputBuffer = new StringBuffer();
+        String line;
+
+        while ((line = file.readLine()) != null) {
+            inputBuffer.append(line);
+            inputBuffer.append('\n');
+        }
+        file.close();
+        String inputStr = inputBuffer.toString();
+        inputStr = inputStr.replace(UserData.password, passwd);
+        FileOutputStream fileOut = new FileOutputStream(path);
+        fileOut.write(inputStr.getBytes());
+        fileOut.close();
+        }
+     catch (Exception e) {
+        System.out.println("Problem z odczytem pliku.");
+        }          
+  }
 }
