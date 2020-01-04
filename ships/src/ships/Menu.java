@@ -21,7 +21,8 @@ public class Menu {
         if(UserData.checkUserAndPassword()){
             Menu.displayMainMenu();
         } else {
-            System.out.println("Nie ma takiego użytkownika lub hasło jest nieprawidłowe! Spróbować ponownie? (T/N)");
+            System.out.println("Nie ma takiego użytkownika lub hasło jest nieprawidłowe! "
+                    + "Spróbować ponownie? (T/N)");
             char ch = sc.next().charAt(0);
             switch(ch){
                 case 'T':
