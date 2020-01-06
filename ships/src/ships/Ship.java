@@ -1,6 +1,5 @@
 package ships;
 
-import javax.swing.text.Position;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
