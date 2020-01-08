@@ -46,6 +46,8 @@ public class Menu {
         char ch = sc.next().charAt(0);
         switch(ch){
             case '1':
+                Game game = new Game();
+                game.start();
                 break;
             case '2':
                 break;
@@ -99,7 +101,7 @@ public class Menu {
                 displayRegisterPanel();                
                 break;
              case '3':
-                              
+                System.exit(0);              
                 break;
             default:
                 System.out.println("Nieprawidlowy wybor!");

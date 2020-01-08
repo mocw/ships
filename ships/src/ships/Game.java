@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ships;
 
 /**
@@ -38,6 +33,6 @@ public class Game {
                     players[0];
         }
 
-        System.out.printf("Congrats Player %d, you won!",player.getId());
+        System.out.printf("Gracz %d zwycięża!",player.getId());
     }
 }

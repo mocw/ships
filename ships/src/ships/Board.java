@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ships;
 
 
@@ -17,10 +12,6 @@ public class Board {
     private static final Ship[] ships;
     private char[][] board;
 
-    /**
-     * Initialize ships (once).
-     *
-     */
 
     static {
         ships = new Ship[]{
@@ -38,9 +29,6 @@ public class Board {
     }
 
 
-    /**
-     * Constructor
-     */
     public Board() {
         board = new char[Constants.BOARD_SIZE][Constants.BOARD_SIZE];
 
@@ -170,10 +158,8 @@ public class Board {
         printBoard();
     }
 
-
-    /**
-     * Print board.
-     */
+    
+    
     private void printBoard() {
         System.out.print("\t");
 

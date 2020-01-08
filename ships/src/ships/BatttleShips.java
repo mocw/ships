@@ -20,8 +20,6 @@ public class BatttleShips {
     
     public static void main(String[] args) {
         Menu.displayLoginRegisterChoose();
-        Game game = new Game();
-        game.start();
     }
     
 }
