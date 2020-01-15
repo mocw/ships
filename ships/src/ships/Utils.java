@@ -50,5 +50,4 @@ public class Utils {
                 && from.getX() <= point.getX()
                 && to.getX() >= point.getX();
     }
-
 }

@@ -6,7 +6,7 @@ package ships;
  */
 public class Constants {
     private Constants() {}
-     public static final int FOUR_MASTED_SHIP_SIZE = 4;
+    public static final int FOUR_MASTED_SHIP_SIZE = 4;
     public static final int THREE_MASTED_SHIP_SIZE = 3;
     public static final int TWO_MASTED_SHIP_SIZE = 2;
     public static final int ONE_MASTED_SHIP_SIZE = 1;

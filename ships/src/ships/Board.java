@@ -13,7 +13,7 @@ public class Board {
     private char[][] board;
 
 
-    static {
+     static {
         ships = new Ship[]{
                 new Ship("Czteromasztowiec1", Constants.FOUR_MASTED_SHIP_SIZE),
                 new Ship("Trojmasztowiec1", Constants.THREE_MASTED_SHIP_SIZE),
@@ -88,7 +88,7 @@ public class Board {
                     Point to = new Point(s.nextInt(), s.nextInt());
 
                     while(ship.getSize() != Utils.distanceBetweenPoints(from, to)) {
-                        System.out.printf("The ship currently being placed on the board is of length: %d. Change your coordinates and try again",
+                        System.out.printf("Okręt, który próbujesz umieścić ma długość: %d. Podaj prawidłowe współrzędne!",
                                 ship.getSize());
 
                         from = new Point(s.nextInt(), s.nextInt());
@@ -97,12 +97,17 @@ public class Board {
                     Position position = new Position(from, to);
 
                     if(!isPositionOccupied(position)) {
-                        drawShipOnBoard(position);
-                        ship.setPosition(position);
-                        isShipPlacementLegal = true;
-                    } else {
-                        System.out.println("A ship in that position already exists - try again");
-                    }
+                        if(!isSpaceBetweenShips(position)){
+                            System.out.println("W pobliżu znajduje się inny okręt! Spróbuj ponownie");
+                        } else {
+                            drawShipOnBoard(position);
+                            ship.setPosition(position);
+                            isShipPlacementLegal = true;
+                        }                        
+                    }  else {
+                            System.out.println("Na tej pozycji znajduje się już inny okręt! Spróbuj ponownie");
+                        }                        
+                    
 
                 } catch(IndexOutOfBoundsException e) {
                     System.out.println("Invalid coordinates - Outside board");
@@ -142,6 +147,26 @@ public class Board {
 
         return isOccupied;
     }
+    
+    private boolean isSpaceBetweenShips(Position position){
+        Point from = position.getFrom();
+        Point to = position.getTo();
+        boolean isSpace = true;
+        outer:
+           for(int i = (int) from.getY() - 1; i < to.getY(); i++) {
+            for(int j = (int) from.getX() - 1; j < to.getX(); j++) {
+                if(i<1 || j<1) continue;
+                if(board[i+1][j] == Constants.SHIP_ICON ||
+                  board[i-1][j] == Constants.SHIP_ICON  ||
+                  board[i][j+1] == Constants.SHIP_ICON  ||
+                  board[i][j-1] == Constants.SHIP_ICON) {
+                    isSpace=false;
+                    break outer;
+                }
+            }
+        }
+        return isSpace;
+    }
 
     /**
      *
@@ -162,9 +187,9 @@ public class Board {
     
     private void printBoard() {
         System.out.print("\t");
-
-        for(int i = 0; i < Constants.BOARD_SIZE; i++) {
-            System.out.print(Constants.BOARD_LETTERS[i] + "\t");
+       
+        for(int i = 0; i < Constants.BOARD_SIZE; i++) {            
+            System.out.print(Constants.BOARD_LETTERS[i] +"("+(i+1)+")" + "\t");
         }
 
         System.out.println();
