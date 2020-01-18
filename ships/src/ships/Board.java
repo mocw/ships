@@ -74,6 +74,7 @@ public class Board {
      */
     private void placeShipsOnBoard() {
         System.out.printf("%nAlright - Time to place out your ships%n%n");
+        printBoard();
         Scanner s = new Scanner(System.in);
 
         for(int i = 0; i < ships.length; i++) {
@@ -155,14 +156,14 @@ public class Board {
         outer:
            for(int i = (int) from.getY() - 1; i < to.getY(); i++) {
             for(int j = (int) from.getX() - 1; j < to.getX(); j++) {
-                if(i<1 || j<1) continue;
-                if(board[i+1][j] == Constants.SHIP_ICON ||
-                  board[i-1][j] == Constants.SHIP_ICON  ||
-                  board[i][j+1] == Constants.SHIP_ICON  ||
-                  board[i][j-1] == Constants.SHIP_ICON) {
-                    isSpace=false;
-                    break outer;
-                }
+                   System.out.println("y: " + i + " x: " + j);
+                         if(board[i+1 >= 10 ? 9 : i+1][j] == Constants.SHIP_ICON ||
+                        board[i-1 < 0 ? 0 : i-1][j] == Constants.SHIP_ICON  ||
+                        board[i][j+1 >= 10 ? 9 : j+1] == Constants.SHIP_ICON  ||
+                        board[i][j-1 < 0 ? 0 : j-1] == Constants.SHIP_ICON) {
+                          isSpace=false;
+                          break outer;
+                        }               
             }
         }
         return isSpace;
