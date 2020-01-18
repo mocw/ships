@@ -25,8 +25,10 @@ public class UserData {
     private static String login;
     private static String password;
     private static Writer output;
-    private static String path = "C:\\Users\\wojmo\\Documents\\NetBeansProjects\\ships\\ships\\ships\\users\\users.txt";
-    private static File f = new File(path);
+    private static String usersPath = "C:\\Users\\wojmo\\Documents\\NetBeansProjects\\ships\\ships\\ships\\users\\users.txt";
+    private static String statsPath = "C:\\Users\\wojmo\\Documents\\NetBeansProjects\\ships\\ships\\ships\\users\\userStats.txt";
+    private static File usersFile = new File(usersPath);
+    private static File statsFile = new File(statsPath);
     private static UserData instance;
 
     private UserData() {}
@@ -38,9 +40,18 @@ public class UserData {
         return instance;
     }
     
-    private static void openFile(){
+    private static void openUSersFile(){
         try {
-             sc =new Scanner (f);
+             sc =new Scanner (usersFile);
+          }
+      catch(Exception e){
+      System.out.println("couldn't find file");
+      }
+    }
+    
+    private static void openStatsFile(){
+        try {
+             sc =new Scanner (statsFile);
           }
       catch(Exception e){
       System.out.println("couldn't find file");
@@ -48,7 +59,7 @@ public class UserData {
     }
     
     public static boolean checkUserAndPassword(){
-        openFile();
+        openUSersFile();
         String temp;
         String[] info;
         while(sc.hasNext()){
@@ -70,7 +81,7 @@ public class UserData {
     }
     
     public static boolean checkUser(){
-        openFile();
+        openUSersFile();
         String temp;
         String[] info;
         while(sc.hasNext()){
@@ -85,7 +96,7 @@ public class UserData {
     }
     
     public static void createAccount() {
-       File f = new File(path);
+       File f = new File(usersPath);
        if(checkUser()){
            System.out.println("Uzytkownik juz istnieje!");
            return;
@@ -103,7 +114,8 @@ public class UserData {
     public static void displayProfile(){
         System.out.println("Profil użytkownika " + UserData.login);
         System.out.println("1. Zmień nick");
-        System.out.println("1. Zmień hasło");
+        System.out.println("2. Zmień hasło");
+        System.out.println("3. Statystyki");
         char ch = in.next().charAt(0);
         switch(ch){
             case '1':
@@ -112,6 +124,13 @@ public class UserData {
             case '2':
                 UserData.changePassword();
                 break;
+            case '3':
+                UserData.displayStats();
+                break;
+            default:
+                System.out.println("Nieprawidłowy wybór!");
+                displayProfile();
+                break;
         }
     }
     
@@ -119,9 +138,9 @@ public class UserData {
         String nickname;
         System.out.println("Podaj nowy nick:");
         nickname = in.next();
-         openFile();             
+         openUSersFile();             
           try {
-        BufferedReader file = new BufferedReader(new FileReader(path));
+        BufferedReader file = new BufferedReader(new FileReader(usersPath));
         StringBuffer inputBuffer = new StringBuffer();
         String line;
 
@@ -132,7 +151,7 @@ public class UserData {
         file.close();
         String inputStr = inputBuffer.toString();
         inputStr = inputStr.replace(UserData.login, nickname);
-        FileOutputStream fileOut = new FileOutputStream(path);
+        FileOutputStream fileOut = new FileOutputStream(usersPath);
         fileOut.write(inputStr.getBytes());
         fileOut.close();
         }
@@ -145,9 +164,9 @@ public class UserData {
        String passwd;
         System.out.println("Podaj nowe haslo:");
         passwd = in.next();
-         openFile();             
+         openUSersFile();             
           try {
-        BufferedReader file = new BufferedReader(new FileReader(path));
+        BufferedReader file = new BufferedReader(new FileReader(usersPath));
         StringBuffer inputBuffer = new StringBuffer();
         String line;
 
@@ -158,7 +177,7 @@ public class UserData {
         file.close();
         String inputStr = inputBuffer.toString();
         inputStr = inputStr.replace(UserData.password, passwd);
-        FileOutputStream fileOut = new FileOutputStream(path);
+        FileOutputStream fileOut = new FileOutputStream(usersPath);
         fileOut.write(inputStr.getBytes());
         fileOut.close();
         }
@@ -166,4 +185,44 @@ public class UserData {
         System.out.println("Problem z odczytem pliku.");
         }          
   }
+    
+   public static void saveStats(Player player){
+       openStatsFile();
+       File f = new File(statsPath);
+       try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f, true));
+            bw.append(UserData.login + " " + player.getShotHit() + " " + player.getShotMissed() + " "
+                    + player.getDate());
+            bw.newLine();
+            bw.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+   }
+   
+   private static void displayStats(){
+       openStatsFile();
+        String temp;
+        String[] info;
+        boolean statsExists = false;
+        try{
+         while(sc.hasNext()){
+            temp = sc.nextLine();
+            info = temp.split(" ");
+            
+            if(info[0].equals(login)){
+                statsExists = true;
+                System.out.println(" Data: " + info[3] + " " + info[4] + "Strzały trafione: " + info[1] + 
+                        ", strzały chybione: " + info[2]);
+            }
+        }
+        if(!statsExists) {
+            System.out.println("Nie posiadasz jeszcze statystyk!");
+        }
+        displayProfile();
+        } catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("Info index out of bound!");
+            displayProfile();
+        }
+   }
 }

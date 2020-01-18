@@ -6,6 +6,8 @@
 package ships;
 
 import java.awt.Point;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -19,6 +21,10 @@ public class Player {
     private Board board;
     private Map<Point, Boolean> targetHistory;
     private Scanner scanner;
+    private String date;
+    private int shotMissed;
+    private int shotHit;
+    
 
     /**
      * Instantiates a new Player.
@@ -29,6 +35,11 @@ public class Player {
         System.out.printf("%n=== Setting up everything for Player %s ====", id);
         this.id = id;
         this.lives = Constants.PLAYER_LIVES;
+        this.shotMissed = 0;
+        this.shotHit = 0;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        this.date = format.format(new Date());
+        System.out.println(date);
         this.board = new Board();
         this.targetHistory = new HashMap<>();
         this.scanner = new Scanner(System.in);
@@ -50,6 +61,18 @@ public class Player {
      */
     public int getLives() {
         return lives;
+    }
+    
+    public String getDate() {
+        return date;
+    }
+
+    public int getShotMissed() {
+        return shotMissed;
+    }
+
+    public int getShotHit() {
+        return shotHit;
     }
 
     /**
@@ -88,7 +111,10 @@ public class Player {
 
         if(isShipHit) {
             ship.shipWasHit();
+            this.shotHit++;
             opponent.decrementLiveByOne();
+        } else {
+            this.shotMissed++;
         }
         targetHistory.put(point, isShipHit);
         System.out.printf("Player %d, targets (%d, %d)",
@@ -97,4 +123,6 @@ public class Player {
                 (int)point.getY());
         System.out.println("...and " + ((isShipHit) ? "HITS!" : "misses..."));
     }
+    
+    
 }

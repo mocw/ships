@@ -149,6 +149,12 @@ public class Board {
         return isOccupied;
     }
     
+    
+     /**
+     *
+     * @param position
+     * @return
+     */
     private boolean isSpaceBetweenShips(Position position){
         Point from = position.getFrom();
         Point to = position.getTo();
