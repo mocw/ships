@@ -116,16 +116,23 @@ public class UserData {
         System.out.println("1. Zmień nick");
         System.out.println("2. Zmień hasło");
         System.out.println("3. Statystyki");
+         System.out.println("4. Powrót");
         char ch = in.next().charAt(0);
         switch(ch){
             case '1':
                 UserData.changeNick();
+                displayProfile();
                 break;
             case '2':
                 UserData.changePassword();
+                displayProfile();
                 break;
             case '3':
                 UserData.displayStats();
+                displayProfile();
+                break;
+            case '4':
+                Menu.displayMainMenu();
                 break;
             default:
                 System.out.println("Nieprawidłowy wybór!");
@@ -192,7 +199,7 @@ public class UserData {
        try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(f, true));
             bw.append(UserData.login + " " + player.getShotHit() + " " + player.getShotMissed() + " "
-                    + player.getDate());
+                    + player.getDate() + "\n");
             bw.newLine();
             bw.close();
         } catch (IOException e) {
@@ -212,16 +219,15 @@ public class UserData {
             
             if(info[0].equals(login)){
                 statsExists = true;
-                System.out.println(" Data: " + info[3] + " " + info[4] + "Strzały trafione: " + info[1] + 
+                System.out.println(" Data: " + info[3] + " " + info[4] + " Strzały trafione: " + info[1] + 
                         ", strzały chybione: " + info[2]);
             }
         }
         if(!statsExists) {
             System.out.println("Nie posiadasz jeszcze statystyk!");
         }
-        displayProfile();
         } catch (ArrayIndexOutOfBoundsException e){
-            System.out.println("Info index out of bound!");
+            System.out.println("Index out of bound!");
             displayProfile();
         }
    }

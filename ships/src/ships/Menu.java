@@ -37,7 +37,7 @@ public class Menu {
         }
     }
     
-    private static void displayMainMenu() {
+    public static void displayMainMenu() {
         System.out.println("MENU GŁÓWNE");
         System.out.println("1. Nowa gra");
         System.out.println("2. Wróc do rozgrywki");
