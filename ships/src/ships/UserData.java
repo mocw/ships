@@ -199,7 +199,7 @@ public class UserData {
        try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(f, true));
             bw.append(UserData.login + " " + player.getShotHit() + " " + player.getShotMissed() + " "
-                    + player.getDate() + "\n");
+                    + player.getDate());
             bw.newLine();
             bw.close();
         } catch (IOException e) {
