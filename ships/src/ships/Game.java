@@ -26,14 +26,14 @@ public class Game {
         int j = 1;
         int size = players.length;
         Player player = null;
-
         while(players[0].getLives() > 0 && players[1].getLives() > 0) {
             players[i++ % size].turnToPlay(players[j++ % size]);
             player = (players[0].getLives() < players[1].getLives()) ?
                     players[1] :
                     players[0];
         }
+        String winner = player.getId() == 1 ? "Wygrałeś!" : "Przeciwnik zwycięża!";
         userData.saveStats(players[0],player.getId() == 1 ? true : false);
-        System.out.printf("Gracz nr. %d zwycięża!",player.getId());
+        System.out.printf(winner);
     }
 }

@@ -11,6 +11,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author wojmo
@@ -20,6 +22,7 @@ public class Player {
     private int lives;
     private Board board;
     private Map<Point, Boolean> targetHistory;
+    private List<Point> playerShots;
     private Scanner scanner;
     private String date;
     private int shotsMissed;
@@ -33,12 +36,12 @@ public class Player {
      * @param id the id
      */
     public Player(int id) {
-        //System.out.printf("%n=== Setting up everything for Player %s ====", id);
         this.id = id;
         this.lives = Constants.PLAYER_LIVES;
         this.shotsMissed = 0;
         this.shotsHit = 0;
         this.shots = 0;
+        this.playerShots = new ArrayList();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         this.date = format.format(new Date());
         if(id == 1) this.board = new Board(false);
@@ -84,10 +87,10 @@ public class Player {
     public int getShots() {
         return shots;
     }
-    
-    
-    
-    
+
+    public List<Point> getPlayerShots() {
+        return playerShots;
+    }               
 
     /**
      * Decrement live by one.
@@ -102,25 +105,25 @@ public class Player {
      */
     public void turnToPlay(Player opponent){
         if(id == 1){
-        System.out.printf("Wybierz współrzędne do oddania strzału (x y): ");
-        Point point = new Point(scanner.nextInt(), scanner.nextInt());
+            System.out.printf("Wybierz współrzędne do oddania strzału (x y): ");
+            Point point = new Point(scanner.nextInt(), scanner.nextInt());
 
-        while(targetHistory.get(point) != null) {
-        System.out.print("Juz oddałeś strzał na te współrzędne!");
-        point = new Point(scanner.nextInt(), scanner.nextInt());
-        }
-
-        attackOpponent(point, opponent);
-        } else {
-        System.out.printf("Podaj współrzędne strzału przeciwnika (x y) ");
-        Point point = new Point(scanner.nextInt(), scanner.nextInt());
-
-        while(targetHistory.get(point) != null) {
-            System.out.print("Ta pozycja już została wybrana!");
+            while(targetHistory.get(point) != null) {
+            System.out.print("Juz oddałeś strzał na te współrzędne!");
             point = new Point(scanner.nextInt(), scanner.nextInt());
-        }
+            }
 
-        attack(point, opponent);
+            attackOpponent(point, opponent);
+        } else {
+            System.out.printf("Podaj współrzędne strzału przeciwnika (x y) ");
+            Point point = new Point(scanner.nextInt(), scanner.nextInt());
+
+            while(targetHistory.get(point) != null) {
+                System.out.print("Ta pozycja już została wybrana!");
+                point = new Point(scanner.nextInt(), scanner.nextInt());
+            }
+
+            attack(point, opponent);
         }
     }
     
@@ -155,6 +158,7 @@ public class Player {
             }
         }
         this.shots++;
+        this.playerShots.add(point);
         if(isShipHit) {
             this.shotsHit++;
             opponent.decrementLiveByOne();

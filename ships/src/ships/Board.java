@@ -3,7 +3,8 @@ package ships;
 
 import java.awt.Point;
 import java.util.Scanner;
-
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author wojmo
@@ -11,6 +12,7 @@ import java.util.Scanner;
 public class Board {
     private static final Ship[] ships;
     private char[][] board;
+    private List<Position> userShips;
 
 
      static {
@@ -37,7 +39,7 @@ public class Board {
                 board[i][j] = Constants.BOARD_ICON;
             }
         }
-
+        userShips = new ArrayList<Position>();
        if(!opponent) placeShipsOnBoard();
     }
 
@@ -112,6 +114,7 @@ public class Board {
                         } else {
                             drawShipOnBoard(position);
                             ship.setPosition(position);
+                            userShips.add(position);
                             isShipPlacementLegal = true;
                         }                        
                     }  else {

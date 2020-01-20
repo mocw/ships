@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.Scanner;
 
 /**
@@ -194,7 +195,7 @@ public class UserData {
    public static void saveStats(Player player,boolean hasWon){
        openStatsFile();
        File f = new File(statsPath);
-       String status = hasWon?"wygrana" : "przegrana";
+       String status = hasWon? "wygrana" : "przegrana";
        try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(f, true));
             bw.append(UserData.login + " " + player.getShots() + " " + player.getShotHit() + 
