@@ -39,8 +39,8 @@ public class Player {
         this.shotHit = 0;
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         this.date = format.format(new Date());
-        System.out.println(date);
-        this.board = new Board();
+        if(id == 1) this.board = new Board(false);
+        else this.board = new Board(true);
         this.targetHistory = new HashMap<>();
         this.scanner = new Scanner(System.in);
     }
@@ -75,6 +75,12 @@ public class Player {
         return shotHit;
     }
 
+    public Board getBoard() {
+        return board;
+    }
+    
+    
+
     /**
      * Decrement live by one.
      */
@@ -82,21 +88,76 @@ public class Player {
         lives--;
     }
 
-    /**
-     * Turn to play.
-     *
-     * @param opponent the opponent
+    
+     /**
+     * Turns player.
      */
-    public void turnToPlay(Player opponent) {
-        System.out.printf("%n%nPlayer %d, Choose coordinates you want to hit (x y) ", id);
+    public void turnToPlay(Player opponent){
+        if(id == 1){
+        System.out.printf("Wybierz współrzędne do oddania strzału (x y): ");
         Point point = new Point(scanner.nextInt(), scanner.nextInt());
 
         while(targetHistory.get(point) != null) {
-            System.out.print("This position has already been tried");
+        System.out.print("Juz oddałeś strzał na te współrzędne!");
+        point = new Point(scanner.nextInt(), scanner.nextInt());
+        }
+
+        attackOpponent(point, opponent);
+        } else {
+        System.out.printf("Podaj współrzędne przeciwnika (x y) ");
+        Point point = new Point(scanner.nextInt(), scanner.nextInt());
+
+        while(targetHistory.get(point) != null) {
+            System.out.print("Ta pozycja już została wybrana!");
             point = new Point(scanner.nextInt(), scanner.nextInt());
         }
 
         attack(point, opponent);
+        }
+    }
+    
+     /**
+     * Attack opponent.
+     * @param point
+     * @param opponent
+     */
+    private void attackOpponent(Point point, Player opponent) {
+        boolean isShipHit = false;
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("Czy oddany strzały jest trafiony? T/N");
+        char ch = sc.next().charAt(0);
+        boolean loopctrl = false;
+        while(!loopctrl){
+        switch(ch){
+            case 'T':
+            case 't':
+                isShipHit = true;
+                loopctrl = true;
+                break;
+            case 'N':
+            case 'n':
+                isShipHit = false;
+                loopctrl = true;
+                break;
+            default:
+            System.out.println("Nieprawidłowy wybór!");    
+                break;
+            }
+        }
+        if(isShipHit) {
+            this.shotHit++;
+            opponent.decrementLiveByOne();
+        } else {
+            this.shotMissed++;
+        }
+        opponent.board.targetOpponentShip(point, isShipHit);
+        targetHistory.put(point, isShipHit);
+        System.out.printf("Player %d, targets (%d, %d)",
+                id,
+                (int)point.getX(),
+                (int)point.getY());
+        System.out.println("...and " + ((isShipHit) ? "HITS!" : "misses..."));
     }
 
     /**
@@ -122,7 +183,5 @@ public class Player {
                 (int)point.getX(),
                 (int)point.getY());
         System.out.println("...and " + ((isShipHit) ? "HITS!" : "misses..."));
-    }
-    
-    
+    }       
 }

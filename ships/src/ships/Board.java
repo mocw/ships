@@ -29,7 +29,7 @@ public class Board {
     }
 
 
-    public Board() {
+    public Board(boolean opponent) {
         board = new char[Constants.BOARD_SIZE][Constants.BOARD_SIZE];
 
         for(int i = 0; i < Constants.BOARD_SIZE; i++) {
@@ -38,7 +38,7 @@ public class Board {
             }
         }
 
-        placeShipsOnBoard();
+       if(!opponent) placeShipsOnBoard();
     }
 
 
@@ -67,6 +67,12 @@ public class Board {
         printBoard();
 
         return (isHit) ? hitShip : null;
+    }
+    
+    public void targetOpponentShip(Point point,boolean isHit){
+        final char result = isHit ? Constants.SHIP_IS_HIT_ICON : Constants.SHOT_MISSED_ICON;
+        updateShipOnBoard(point, result);
+        printBoard();
     }
 
     /**

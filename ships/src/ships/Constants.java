@@ -10,7 +10,7 @@ public class Constants {
     public static final int THREE_MASTED_SHIP_SIZE = 3;
     public static final int TWO_MASTED_SHIP_SIZE = 2;
     public static final int ONE_MASTED_SHIP_SIZE = 1;
-    public static final int PLAYER_LIVES = 4;
+    public static final int PLAYER_LIVES = 20;
     
     public static final char SHIP_ICON = 'X';
     public static final char BOARD_ICON = '-';
