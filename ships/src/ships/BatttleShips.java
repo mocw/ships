@@ -5,15 +5,12 @@
  */
 package ships;
 
-import java.util.Scanner;
 
 /**
  *
  * @author wojmo 
  */
 public class BatttleShips {
-
-    private static Scanner sc = new Scanner(System.in);
     /**
      * @param args the command line arguments
      */

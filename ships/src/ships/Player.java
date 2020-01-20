@@ -181,7 +181,9 @@ public class Player {
         boolean isShipHit = (ship != null) ? true : false;
 
         if(isShipHit) {
-            ship.shipWasHit();
+            if(ship != null){
+                ship.shipWasHit();
+            }
             opponent.decrementLiveByOne();
         } 
         targetHistory.put(point, isShipHit);

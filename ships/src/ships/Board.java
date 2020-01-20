@@ -16,15 +16,15 @@ public class Board {
      static {
         ships = new Ship[]{
                 new Ship("Czteromasztowiec1", Constants.FOUR_MASTED_SHIP_SIZE)
-//                new Ship("Trojmasztowiec1", Constants.THREE_MASTED_SHIP_SIZE),
-//                new Ship("Trojmasztowiec2", Constants.THREE_MASTED_SHIP_SIZE),
-//                new Ship("Dwumasztowiec1", Constants.TWO_MASTED_SHIP_SIZE),
-//                new Ship("Dwumasztowiec2", Constants.TWO_MASTED_SHIP_SIZE),
-//                new Ship("Dwumasztowiec3", Constants.TWO_MASTED_SHIP_SIZE),
-//                new Ship("Jednomasztowiec1", Constants.ONE_MASTED_SHIP_SIZE),
-//                new Ship("Jednomasztowiec2", Constants.ONE_MASTED_SHIP_SIZE),
-//                new Ship("Jednomasztowiec3", Constants.ONE_MASTED_SHIP_SIZE),
-//                new Ship("Jednomasztowiec4", Constants.ONE_MASTED_SHIP_SIZE)
+                new Ship("Trojmasztowiec1", Constants.THREE_MASTED_SHIP_SIZE),
+                new Ship("Trojmasztowiec2", Constants.THREE_MASTED_SHIP_SIZE),
+                new Ship("Dwumasztowiec1", Constants.TWO_MASTED_SHIP_SIZE),
+                new Ship("Dwumasztowiec2", Constants.TWO_MASTED_SHIP_SIZE),
+                new Ship("Dwumasztowiec3", Constants.TWO_MASTED_SHIP_SIZE),
+                new Ship("Jednomasztowiec1", Constants.ONE_MASTED_SHIP_SIZE),
+                new Ship("Jednomasztowiec2", Constants.ONE_MASTED_SHIP_SIZE),
+                new Ship("Jednomasztowiec3", Constants.ONE_MASTED_SHIP_SIZE),
+                new Ship("Jednomasztowiec4", Constants.ONE_MASTED_SHIP_SIZE)
         };
     }
 
@@ -120,11 +120,10 @@ public class Board {
                     
 
                 } catch(IndexOutOfBoundsException e) {
-                    System.out.println("Invalid coordinates - Outside board");
+                    System.out.println("Nieprawidłowe współrzędne - poza zakresem");
                 }
             }
         }
-
     }
 
 
@@ -153,8 +152,6 @@ public class Board {
                 }
             }
         }
-
-
         return isOccupied;
     }
     
