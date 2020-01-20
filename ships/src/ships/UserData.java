@@ -199,7 +199,8 @@ public class UserData {
        String status = hasWon? "wygrana" : "przegrana";
        try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(f, true));
-            bw.append(UserData.login + " " + player.getShotHit() + " " + player.getShotMissed() + " "
+            bw.append(UserData.login + " " + player.getShots() + " " + player.getShotHit() + 
+                    " " + player.getShotMissed() + " "
                     + player.getDate() + " " + status);
             bw.newLine();
             bw.close();
@@ -220,8 +221,9 @@ public class UserData {
             
             if(info[0].equals(login)){
                 statsExists = true;
-                System.out.println(" Data: " + info[3] + " " + info[4] + " Strzały trafione: " + info[1] + 
-                        ", strzały chybione: " + info[2] + " rezultat: " + info[5]);
+                System.out.println(" Data: " + info[4] + " " + info[5] + " " + "próby: " + info[1] + 
+                        " Strzały trafione: " + info[2] + 
+                        " strzały chybione: " + info[3] + " rezultat: " + info[6]);
             }
         }
         if(!statsExists) {

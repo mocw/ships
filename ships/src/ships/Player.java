@@ -22,8 +22,9 @@ public class Player {
     private Map<Point, Boolean> targetHistory;
     private Scanner scanner;
     private String date;
-    private int shotMissed;
-    private int shotHit;
+    private int shotsMissed;
+    private int shotsHit;
+    private int shots;
     
 
     /**
@@ -35,8 +36,9 @@ public class Player {
         //System.out.printf("%n=== Setting up everything for Player %s ====", id);
         this.id = id;
         this.lives = Constants.PLAYER_LIVES;
-        this.shotMissed = 0;
-        this.shotHit = 0;
+        this.shotsMissed = 0;
+        this.shotsHit = 0;
+        this.shots = 0;
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         this.date = format.format(new Date());
         if(id == 1) this.board = new Board(false);
@@ -68,16 +70,22 @@ public class Player {
     }
 
     public int getShotMissed() {
-        return shotMissed;
+        return shotsMissed;
     }
 
     public int getShotHit() {
-        return shotHit;
+        return shotsHit;
     }
 
     public Board getBoard() {
         return board;
     }
+
+    public int getShots() {
+        return shots;
+    }
+    
+    
     
     
 
@@ -146,19 +154,20 @@ public class Player {
                 break;
             }
         }
+        this.shots++;
         if(isShipHit) {
-            this.shotHit++;
+            this.shotsHit++;
             opponent.decrementLiveByOne();
         } else {
-            this.shotMissed++;
+            this.shotsMissed++;
         }
         opponent.board.targetOpponentShip(point, isShipHit);
         targetHistory.put(point, isShipHit);
-        System.out.printf("Player %d, targets (%d, %d)",
+        System.out.printf("Gracz nr %d, celuje w (%d, %d)",
                 id,
                 (int)point.getX(),
                 (int)point.getY());
-        System.out.println("...and " + ((isShipHit) ? "HITS!" : "misses..."));
+        System.out.println("...i " + ((isShipHit) ? "TRAFIA!" : "NIE trafia..."));
     }
 
     /**
@@ -173,16 +182,13 @@ public class Player {
 
         if(isShipHit) {
             ship.shipWasHit();
-            this.shotHit++;
             opponent.decrementLiveByOne();
-        } else {
-            this.shotMissed++;
-        }
+        } 
         targetHistory.put(point, isShipHit);
-        System.out.printf("Player %d, targets (%d, %d)",
+        System.out.printf("Gracz nr %d, celuje w (%d, %d)",
                 id,
                 (int)point.getX(),
                 (int)point.getY());
-        System.out.println("...and " + ((isShipHit) ? "HITS!" : "misses..."));
+        System.out.println("...i " + ((isShipHit) ? "TRAFIA!" : "NIE trafia..."));
     }       
 }
