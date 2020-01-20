@@ -157,7 +157,8 @@ public class Board {
     
     
      /**
-     *
+     * Checks if there is a space between ships
+     * 
      * @param position
      * @return
      */
