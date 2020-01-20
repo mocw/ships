@@ -12,7 +12,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.util.Scanner;
 
 /**
@@ -24,7 +23,6 @@ public class UserData {
     private static Scanner in = new Scanner(System.in);
     private static String login;
     private static String password;
-    private static Writer output;
     private static String usersPath = "C:\\Users\\wojmo\\Documents\\NetBeansProjects\\ships\\ships\\ships\\users\\users.txt";
     private static String statsPath = "C:\\Users\\wojmo\\Documents\\NetBeansProjects\\ships\\ships\\ships\\users\\userStats.txt";
     private static File usersFile = new File(usersPath);
@@ -196,7 +194,7 @@ public class UserData {
    public static void saveStats(Player player,boolean hasWon){
        openStatsFile();
        File f = new File(statsPath);
-       String status = hasWon? "wygrana" : "przegrana";
+       String status = hasWon?"wygrana" : "przegrana";
        try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(f, true));
             bw.append(UserData.login + " " + player.getShots() + " " + player.getShotHit() + 
