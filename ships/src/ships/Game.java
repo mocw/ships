@@ -31,7 +31,7 @@ public class Game {
                     players[1] :
                     players[0];
         }
-        UserData.getInstance().saveStats(players[0]);
+        UserData.getInstance().saveStats(players[0],player.getId() == 1 ? true : false);
         System.out.printf("Gracz %d zwycięża!",player.getId());
     }
 }

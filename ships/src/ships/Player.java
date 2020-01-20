@@ -32,7 +32,7 @@ public class Player {
      * @param id the id
      */
     public Player(int id) {
-        System.out.printf("%n=== Setting up everything for Player %s ====", id);
+        //System.out.printf("%n=== Setting up everything for Player %s ====", id);
         this.id = id;
         this.lives = Constants.PLAYER_LIVES;
         this.shotMissed = 0;
@@ -104,7 +104,7 @@ public class Player {
 
         attackOpponent(point, opponent);
         } else {
-        System.out.printf("Podaj współrzędne przeciwnika (x y) ");
+        System.out.printf("Podaj współrzędne strzału przeciwnika (x y) ");
         Point point = new Point(scanner.nextInt(), scanner.nextInt());
 
         while(targetHistory.get(point) != null) {
@@ -126,9 +126,9 @@ public class Player {
         Scanner sc = new Scanner(System.in);
         
         System.out.println("Czy oddany strzały jest trafiony? T/N");
-        char ch = sc.next().charAt(0);
         boolean loopctrl = false;
         while(!loopctrl){
+       char ch = sc.next().charAt(0);
         switch(ch){
             case 'T':
             case 't':

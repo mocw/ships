@@ -193,13 +193,14 @@ public class UserData {
         }          
   }
     
-   public static void saveStats(Player player){
+   public static void saveStats(Player player,boolean hasWon){
        openStatsFile();
        File f = new File(statsPath);
+       String status = hasWon? "wygrana" : "przegrana";
        try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(f, true));
             bw.append(UserData.login + " " + player.getShotHit() + " " + player.getShotMissed() + " "
-                    + player.getDate());
+                    + player.getDate() + " " + status);
             bw.newLine();
             bw.close();
         } catch (IOException e) {
@@ -220,7 +221,7 @@ public class UserData {
             if(info[0].equals(login)){
                 statsExists = true;
                 System.out.println(" Data: " + info[3] + " " + info[4] + " Strzały trafione: " + info[1] + 
-                        ", strzały chybione: " + info[2]);
+                        ", strzały chybione: " + info[2] + " rezultat: " + info[5]);
             }
         }
         if(!statsExists) {
