@@ -141,7 +141,8 @@ public class Player {
                 loopctrl = true;
                 break;
             default:
-            System.out.println("Nieprawidłowy wybór!");    
+            System.out.println("Nieprawidłowy wybór!");
+            System.out.println("Czy oddany strzały jest trafiony? T/N");
                 break;
             }
         }

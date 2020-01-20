@@ -65,13 +65,16 @@ public class Board {
         final char result = isHit ? Constants.SHIP_IS_HIT_ICON : Constants.SHOT_MISSED_ICON;
         updateShipOnBoard(point, result);
         printBoard();
-
+        
         return (isHit) ? hitShip : null;
     }
     
     public void targetOpponentShip(Point point,boolean isHit){
         final char result = isHit ? Constants.SHIP_IS_HIT_ICON : Constants.SHOT_MISSED_ICON;
         updateShipOnBoard(point, result);
+        for(int i = 0; i <30; i++) {
+            System.out.println("\n");
+        }
         printBoard();
     }
 
