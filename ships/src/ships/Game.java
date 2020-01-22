@@ -14,7 +14,7 @@ public class Game {
     public Game() {
         players = new Player[]{
                 new Player(1),
-                new Player(2) //przeciwnik
+                new Player(2) 
         };
         userData = UserData.getInstance();
     }
@@ -27,7 +27,12 @@ public class Game {
         int size = players.length;
         Player player = null;
         while(players[0].getLives() > 0 && players[1].getLives() > 0) {
-            players[i++ % size].turnToPlay(players[j++ % size]);
+            if(players[i % size ].isPlayerCanContinue()){
+                players[i % size].turnToPlay(players[j % size]);
+            }
+            else {
+                players[++i % size].turnToPlay(players[++j % size]);
+            }
             player = (players[0].getLives() < players[1].getLives()) ?
                     players[1] :
                     players[0];

@@ -18,15 +18,15 @@ public class Board {
      static {
         ships = new Ship[]{
                 new Ship("Czteromasztowiec1", Constants.FOUR_MASTED_SHIP_SIZE),
-                new Ship("Trojmasztowiec1", Constants.THREE_MASTED_SHIP_SIZE),
-                new Ship("Trojmasztowiec2", Constants.THREE_MASTED_SHIP_SIZE),
-                new Ship("Dwumasztowiec1", Constants.TWO_MASTED_SHIP_SIZE),
-                new Ship("Dwumasztowiec2", Constants.TWO_MASTED_SHIP_SIZE),
-                new Ship("Dwumasztowiec3", Constants.TWO_MASTED_SHIP_SIZE),
-                new Ship("Jednomasztowiec1", Constants.ONE_MASTED_SHIP_SIZE),
-                new Ship("Jednomasztowiec2", Constants.ONE_MASTED_SHIP_SIZE),
-                new Ship("Jednomasztowiec3", Constants.ONE_MASTED_SHIP_SIZE),
-                new Ship("Jednomasztowiec4", Constants.ONE_MASTED_SHIP_SIZE)
+//                new Ship("Trojmasztowiec1", Constants.THREE_MASTED_SHIP_SIZE),
+//                new Ship("Trojmasztowiec2", Constants.THREE_MASTED_SHIP_SIZE),
+//                new Ship("Dwumasztowiec1", Constants.TWO_MASTED_SHIP_SIZE),
+//                new Ship("Dwumasztowiec2", Constants.TWO_MASTED_SHIP_SIZE),
+//                new Ship("Dwumasztowiec3", Constants.TWO_MASTED_SHIP_SIZE),
+//                new Ship("Jednomasztowiec1", Constants.ONE_MASTED_SHIP_SIZE),
+//                new Ship("Jednomasztowiec2", Constants.ONE_MASTED_SHIP_SIZE),
+//                new Ship("Jednomasztowiec3", Constants.ONE_MASTED_SHIP_SIZE),
+//                new Ship("Jednomasztowiec4", Constants.ONE_MASTED_SHIP_SIZE)
         };
     }
 
@@ -40,7 +40,9 @@ public class Board {
             }
         }
         userShips = new ArrayList<Position>();
-       if(!opponent) placeShipsOnBoard();
+       if(!opponent){
+           placeShipsOnBoard();
+       }
     }
 
 
@@ -74,9 +76,6 @@ public class Board {
     public void targetOpponentShip(Point point,boolean isHit){
         final char result = isHit ? Constants.SHIP_IS_HIT_ICON : Constants.SHOT_MISSED_ICON;
         updateShipOnBoard(point, result);
-        for(int i = 0; i <30; i++) {
-            System.out.println("\n");
-        }
         printBoard();
     }
 
@@ -106,7 +105,9 @@ public class Board {
                         from = new Point(s.nextInt(), s.nextInt());
                         to = new Point(s.nextInt(), s.nextInt());
                     }
-                    Position position = new Position(from, to);
+                   
+                      Position position = new Position(from, to);
+   
 
                     if(!isPositionOccupied(position)) {
                         if(!isSpaceBetweenShips(position)){

@@ -28,6 +28,7 @@ public class Player {
     private int shotsMissed;
     private int shotsHit;
     private int shots;
+    private boolean playerCanContinue = false;
     
 
     /**
@@ -99,30 +100,33 @@ public class Player {
         lives--;
     }
 
+    public boolean isPlayerCanContinue() {
+        return playerCanContinue;
+    }
+
     
      /**
      * Turns player.
      */
     public void turnToPlay(Player opponent){
-        if(id == 1){ //JESLI GRACZ
-            System.out.printf("Wybierz współrzędne do oddania strzału (x y): ");
-            Point point = new Point(scanner.nextInt(), scanner.nextInt());
-
-            while(targetHistory.get(point) != null) {
+        playerCanContinue = false;
+        String whoShots = id == 1 ? "Twoja kolej" : "Kolej przeciwnika";
+        System.out.printf("==========="
+                +whoShots + "================"+
+                "\n Wybierz współrzędne do oddania strzału (x y): ");
+        Point point = new Point(scanner.nextInt(), scanner.nextInt());
+        if(point.getX() > Constants.BOARD_SIZE || point.getX() < 0
+                || point.getY() > Constants.BOARD_SIZE || point.getY() < 0) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+          
+        while(targetHistory.get(point) != null) {
             System.out.print("Juz oddałeś strzał na te współrzędne!");
             point = new Point(scanner.nextInt(), scanner.nextInt());
-            }
-
+        }
+        if(id == 1){ //JESLI GRACZ
             attackOpponent(point, opponent);
         } else { //JESLI PRZECIWNIK
-            System.out.printf("Podaj współrzędne strzału przeciwnika (x y) ");
-            Point point = new Point(scanner.nextInt(), scanner.nextInt());
-
-            while(targetHistory.get(point) != null) {
-                System.out.print("Ta pozycja już została wybrana!");
-                point = new Point(scanner.nextInt(), scanner.nextInt());
-            }
-
             attack(point, opponent);
         }
     }
@@ -160,6 +164,7 @@ public class Player {
         this.shots++;
         this.playerShots.add(point);
         if(isShipHit) {
+            this.playerCanContinue = true;
             this.shotsHit++;
             opponent.decrementLiveByOne();
         } else {
@@ -167,8 +172,7 @@ public class Player {
         }
         opponent.board.targetOpponentShip(point, isShipHit);
         targetHistory.put(point, isShipHit);
-        System.out.printf("Gracz nr %d, celuje w (%d, %d)",
-                id,
+        System.out.printf("Celujesz w (%d, %d)",
                 (int)point.getX(),
                 (int)point.getY());
         System.out.println("...i " + ((isShipHit) ? "TRAFIA!" : "NIE trafia..."));
@@ -186,13 +190,13 @@ public class Player {
 
         if(isShipHit) {
             if(ship != null){
+                this.playerCanContinue = true;
                 ship.shipWasHit();
             }
             opponent.decrementLiveByOne();
         } 
         targetHistory.put(point, isShipHit);
-        System.out.printf("Gracz nr %d, celuje w (%d, %d)",
-                id,
+        System.out.printf("Przeciwnik celuje w (%d, %d)",
                 (int)point.getX(),
                 (int)point.getY());
         System.out.println("...i " + ((isShipHit) ? "TRAFIA!" : "NIE trafia..."));
