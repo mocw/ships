@@ -14,10 +14,13 @@ import java.util.Scanner;
 public class Menu {
     private static Scanner sc = new Scanner(System.in);
     
+     /**
+     * Displays menu with login and password inputs.
+     */
     private static void displayLoginPanel(){
         System.out.println("LOGOWANIE");
         UserData.getInstance();
-        UserData.displayDataPanel();
+        UserData.displayLoginDataPanel();
         if(UserData.checkUserAndPassword()){
             Menu.displayMainMenu();
         } else {
@@ -37,6 +40,9 @@ public class Menu {
         }
     }
     
+     /**
+     * Main menu.
+     */
     public static void displayMainMenu() {
         System.out.println("MENU GŁÓWNE");
         System.out.println("1. Nowa gra");
@@ -64,10 +70,13 @@ public class Menu {
         }
     }
     
+     /**
+     * Register.
+     */
     private static void displayRegisterPanel() {
          System.out.println("REJESTRACJA");
         UserData.getInstance();
-        UserData.displayDataPanel();
+        UserData.displayLoginDataPanel();
         if(UserData.checkUser()){
             System.out.println("Taki użytkownik już istnieje! Jeśli chcesz spróbować ponownie,"
                     + "wciśnij T");
@@ -86,7 +95,10 @@ public class Menu {
             Menu.displayLoginPanel();
         }
     }
-        
+    
+     /**
+     * Login/register selection.
+     */
     public static void displayLoginRegisterChoose(){
         System.out.println("Witaj w grze statki. Wybierz co chcesz zrobić:");
         System.out.println("1 - ZALOGUJ SIE");

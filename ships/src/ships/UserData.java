@@ -72,7 +72,10 @@ public class UserData {
        return false;
     }
     
-    public static void displayDataPanel(){
+     /**
+     * Shows menu to gain login and password data.
+     */
+    public static void displayLoginDataPanel(){
         System.out.print("Uzytkownik: ");
         UserData.login = in.nextLine();
         System.out.print("Hasło: ");
@@ -192,6 +195,9 @@ public class UserData {
         }          
   }
     
+    /**
+     * Saves user stats in a file.
+    */
    public static void saveStats(Player player,boolean hasWon){
        openStatsFile();
        File f = new File(statsPath);
