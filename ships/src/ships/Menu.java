@@ -49,6 +49,7 @@ public class Menu {
         System.out.println("2. Wróc do rozgrywki");
         System.out.println("3. Obejrzyj poprzednie gry");
         System.out.println("4. Profil użytkownika");
+        System.out.println("5. Wyloguj się");
         char ch = sc.next().charAt(0);
         switch(ch){
             case '1':
@@ -62,6 +63,9 @@ public class Menu {
                 break;
             case '4':
                 UserData.displayProfile();
+                break;
+            case '5':
+                Menu.displayLoginRegisterChoose();
                 break;
             default:
                 System.out.println("Nieprawidłowy wybór!");
