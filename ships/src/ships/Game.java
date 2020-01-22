@@ -14,7 +14,7 @@ public class Game {
     public Game() {
         players = new Player[]{
                 new Player(1),
-                new Player(2)
+                new Player(2) //przeciwnik
         };
         userData = UserData.getInstance();
     }

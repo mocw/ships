@@ -104,7 +104,7 @@ public class Player {
      * Turns player.
      */
     public void turnToPlay(Player opponent){
-        if(id == 1){
+        if(id == 1){ //JESLI GRACZ
             System.out.printf("Wybierz współrzędne do oddania strzału (x y): ");
             Point point = new Point(scanner.nextInt(), scanner.nextInt());
 
@@ -114,7 +114,7 @@ public class Player {
             }
 
             attackOpponent(point, opponent);
-        } else {
+        } else { //JESLI PRZECIWNIK
             System.out.printf("Podaj współrzędne strzału przeciwnika (x y) ");
             Point point = new Point(scanner.nextInt(), scanner.nextInt());
 
