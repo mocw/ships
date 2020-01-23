@@ -1,4 +1,1 @@
 user password
-user2 password2
-radek maniek
-tumolec arek
